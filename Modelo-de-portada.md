@@ -19,4 +19,4 @@
 
 ## Enlace a la documentación
 
-* [Enlace a la documentación principal] (https://github.com/) 
+* [Enlace a la documentación principal] (https://github.com/EGC-G2-M/Entregables/blob/main/Documento-del-proyecto.md) 
