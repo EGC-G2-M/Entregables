@@ -82,6 +82,44 @@ Se explicará el sistema desarrollado desde un punto de vista funcional y arquit
 ## Visión global del proceso de desarrollo (1.500 palabras aproximadamente)
 Debe dar una visión general del proceso que ha seguido enlazándolo con las herramientas que ha utilizado. Ponga un ejemplo de un cambio que se proponga al sistema y cómo abordaría todo el ciclo hasta tener ese cambio en producción. Los detalles de cómo hacer el cambio vendrán en el apartado correspondiente. 
 
+## Descripción del sistema (1.500 palabras aproximadamente)
+Se explicará el sistema desarrollado desde un punto de vista funcional y arquitectónico. Se hará una descripción tanto funcional como técnica de sus componentes y su relación con el resto de subsistemas. Habrá una sección que enumere explícitamente cuáles son los cambios que se han desarrollado para el proyecto.
+
+Este documento describe el sistema desarrollado en el repositorio EGC-G2-M/nba-hub, un proyecto diseñado para proporcionar una plataforma centralizada para la consulta y gestión de información relevante de la NBA (National Basketball Association). El sistema aborda las necesidades de usuarios interesados en acceder a estadísticas, resultados y datos de jugadores y equipos de manera eficiente.
+### 1. Perspectiva Funcional del Sistema
+Desde un punto de vista funcional, el sistema se enfoca en la presentación y la interacción con la información, actuando como un punto de acceso a diversos datos del mundo del baloncesto. El sistema implementa las siguientes funcionalidades:
+
+#### 1.1 Visualización de Estadísticas
+Permite a los usuarios consultar estadísticas detalladas de jugadores (puntos, asistencias, rebotes, etc.) y equipos. Esto incluye la capacidad de filtrar y ordenar los datos.
+
+#### 1.2 Búsqueda avanzada
+Permite buscar información específica (jugadores, equipos, temporadas) a través de un motor de búsqueda intuitivo.
+
+#### 1.3 Descarga de datasets
+Permite a los usuarios descargar aquellos datasets de estadísticas que les interesen.
+
+#### 1.4 Interacción en datasets
+El sistema implementa funcionalidades para tener un conteo de número de descargas y visualizar aquellos con mayor número de descargas.
+
+#### 1.5 Comentarios en datasets
+El sistema permite a los usuarios añadir comentarios a los datasets.
+
+### 2. Arquitectura del sistema
+El sistema implementa una arquitectura Cliente-Servidor, estructurada bajo un patrón MVC (Modelo-Vista-Controlador)
+
+#### 2.1 Capas arquitectónicas
+La arquitectura puede dividirse conceptualmente en tres capas principales:
+
+- Capa de Presentación (Frontend):
+        Responsable de la interfaz de usuario (UI/UX) y de la interacción directa con el usuario final. Transmite las peticiones al backend y renderiza los datos recibidos. Interactúa directamente con la Capa de Aplicación a través de la API.
+- Capa de Aplicación (Backend/API):
+        Contiene la lógica de negocio principal del sistema. Recibe las peticiones del frontend, procesa los datos, realiza la validación y llama a la capa de datos para recuperar o manipular la información. Se comunica con la Capa de Presentación y con la Capa de Datos.
+- Capa de Datos:
+        Almacena, gestiona y recupera toda la información persistente, incluyendo estadísticas, metadatos de partidos, perfiles, etc. Es accedida únicamente por la Capa de Aplicación.
+
+### 3. Descripción Técnica de los Componentes y Subsistemas
+
+
 ### Entorno de desarrollo (800 palabras aproximadamente)
 Debe explicar cuál es el entorno de desarrollo que ha usado, cuáles son las versiones usadas y qué pasos hay que seguir para instalar tanto su sistema como los subsistemas relacionados para hacer funcionar el sistema al completo. Si se han usado distintos entornos de desarrollo por parte de distintos miembros del grupo, también debe referenciarlo aquí. 
 
