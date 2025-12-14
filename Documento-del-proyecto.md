@@ -96,9 +96,99 @@ La arquitectura puede dividirse conceptualmente en tres capas principales:
 ### Visión global del proceso de desarrollo (1.500 palabras aproximadamente)
 Debe dar una visión general del proceso que ha seguido enlazándolo con las herramientas que ha utilizado. Ponga un ejemplo de un cambio que se proponga al sistema y cómo abordaría todo el ciclo hasta tener ese cambio en producción. Los detalles de cómo hacer el cambio vendrán en el apartado correspondiente.  
 
-### Entorno de desarrollo (800 palabras aproximadamente)
-Debe explicar cuál es el entorno de desarrollo que ha usado, cuáles son las versiones usadas y qué pasos hay que seguir para instalar tanto su sistema como los subsistemas relacionados para hacer funcionar el sistema al completo. Si se han usado distintos entornos de desarrollo por parte de distintos miembros del grupo, también debe referenciarlo aquí. 
+### Entorno de desarrollo
+Para garantizar la consistencia y flexibilidad durante el ciclo de vida del desarrollo de la aplicación, el equipo de trabajo ha establecido tres entornos distintos, todos ellos basados en **Ubuntu (versión 22.04 LTS o superior)** y usando Visual Studio Code como IDE.
 
+#### Control de Versiones y Repositorio Base
+La gestión del código fuente se realiza mediante **Git**. Independientemente del entorno de desarrollo seleccionado (Local, Docker o Virtualizado), el paso inicial común para todos los integrantes es la obtención del código fuente mediante el clonado del repositorio oficial del proyecto: ```git clone https://github.com/EGC-G2-M/nba-hub```
+
+#### Entorno 1: Desarrollo Local (Nativo)
+Este entorno implica la instalación directa de las dependencias en el sistema operativo anfitrión.
+
+##### Requisitos del Sistema y Base de Datos
+El proyecto requiere **Python 3.12** y el sistema gestor de base de datos **MariaDB (versión 10.11.13)**.
+**Instalación de MariaDB**: Se procede a la instalación y arranque del servicio mediante los siguientes comandos: 
+```
+sudo apt install mariadb-server -y
+sudo systemctl start mariadb
+```
+Posteriormente, se ejecuta el script de seguridad ```sudo mysql_secure_installation```. Para asegurar la instalación correctamente, se deben introducir las siguientes respuestas exactas durante el proceso interactivo:
+```
+Enter current password for root (enter for none): (Pulse Enter)
+Switch to unix_socket authentication [Y/n]: y
+Change the root password? [Y/n]: y
+    - New password: nbahubdb_root_password
+    - Re-enter new password: nbahubdb_root_password
+Remove anonymous users? [Y/n]: y
+Disallow root login remotely? [Y/n]: y
+Remove test database and access to it? [Y/n]: y
+Reload privilege tables now? [Y/n] : y
+```
+
+**Configuración del Esquema y Usuarios**: Una vez asegurado el servicio, se accede a la consola de MariaDB (```sudo mysql -u root -p```) con la contraseña ```nbahubdb_root_password``` para la creación de las bases de datos y el usuario específico de la aplicación:
+```
+CREATE DATABASE nbahubdb;
+CREATE DATABASE nbahubdb_test;
+CREATE USER 'nbahubdb_user'@'localhost' IDENTIFIED BY 'nbahubdb_password';
+GRANT ALL PRIVILEGES ON nbahubdb.* TO 'nbahubdb_user'@'localhost';
+GRANT ALL PRIVILEGES ON nbahubdb_test.* TO 'nbahubdb_user'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+```
+##### Configuración del Entorno Virtual y Dependencias
+Para aislar las librerías del proyecto, se utiliza el módulo ```venv``` de Python. El procedimiento de configuración incluye la definición de variables de entorno y la instalación de dependencias.
+- **1. Variables de Entorno:** Se duplica el fichero de ejemplo para crear la configuración local y se configura el fichero ```.moduleignore``` para excluir el módulo de webhook en desarrollo:
+```
+cp .env.local.example .env
+echo "webhook" > .moduleignore
+```
+-  **2. Creación del Entorno Virtual:**
+```
+sudo apt install python3.12-venv
+python3.12 -m venv venv
+source venv/bin/activate
+```
+-  **3. Instalación de Librerías:** Se actualiza el gestor de paquetes pip, se instalan los requerimientos listados y se configura Rosemary en modo editable:
+```
+pip install --upgrade pip
+pip install -r requirements.txt
+pip install -e ./
+```
+##### Migraciones y Ejecución
+Finalmente, se inicializa la estructura de la base de datos y se puebla con datos de prueba (seeding). Una vez finalizado, se lanza el servidor de desarrollo en modo debug.
+```
+# Migración y Seeding
+flask db upgrade
+rosemary db:seed
+
+# Ejecución del servidor
+flask run --host=0.0.0.0 --reload --debug
+```
+#### Entorno 2: Contenedorización con Docker
+Como alternativa al desarrollo local nativo, se ha implementado un entorno basado en contenedores.
+##### Requisitos y Configuración Inicial
+El prerrequisito fundamental para este entorno es disponer del motor de Docker instalado (versión 29.1.x o superior) junto con el plugin de Docker Compose.
+
+Previo al despliegue, se deben establecer las variables de entorno específicas para la orquestación de contenedores, duplicando el archivo de plantilla proporcionado en el repositorio: ```cp .env.docker.example .env```
+##### Despliegue de Servicios
+El levantamiento de la infraestructura se realiza mediante Docker Compose, utilizando un fichero de definición específico para el entorno de desarrollo (docker-compose.dev.yml). El siguiente comando construye las imágenes necesarias y levanta los contenedores en segundo plano (detached mode):
+```
+docker compose -f docker/docker-compose.dev.yml up -d
+```
+Este comando orquesta automáticamente la creación de la red interna, el volumen de la base de datos y el contenedor de la aplicación Flask.
+
+##### Integración con el IDE (DevContainers)
+Una vez que los servicios están activos, se utiliza la paleta de comandos del editor para ejecutar la acción: ```Reopen in Container```.
+Esta acción permite que el editor de código se conecte directamente al contenedor en ejecución, utilizando el entorno de Python y las herramientas instaladas dentro de él, asegurando que el entorno de escritura de código sea idéntico al de ejecución.
+
+##### Entorno 3: Virtualización con Vagrant y VirtualBox
+Como tercera vía, se ha implementado un entorno basado en Infraestructura como Código (IaC) utilizando virtualización completa. Este enfoque permite desplegar una máquina virtual (VM) que replica exactamente el sistema operativo y la configuración de producción, independientemente del sistema operativo anfitrión del desarrollador (Windows, macOS o Linux).
+##### Requisitos de Virtualización
+Para orquestar este entorno, es necesario disponer de las siguientes herramientas de virtualización:
+    Vagrant: Versión 2.4.x o superior (gestor de entornos).
+    VirtualBox: Versión 7.0.x o superior (hipervisor).
+##### Provisionamiento y Despliegue
+Al igual que en los entornos anteriores, se debe definir el entorno copiando la plantilla específica para Vagrant: ```cp ./.env.vagrant.example .env```. Para levantar la máquina se ejecuta el siguiente comando en la raíz del proyecto: ```.vagrant up```.
 ### Ejercicio de propuesta de cambio
 Se presentará un ejercicio con una propuesta concreta de cambio en la que a partir de un cambio que se requiera, se expliquen paso por paso (incluyendo comandos y uso de herramientas) lo que hay que hacer para realizar dicho cambio. Debe ser un ejercicio ilustrativo de todo el proceso de evolución y gestión de la configuración del proyecto. 
 
