@@ -68,6 +68,60 @@ Debe explicar cuál es el entorno de desarrollo que ha usado, cuáles son las ve
 
 ### Ejercicio de propuesta de cambio
 Se presentará un ejercicio con una propuesta concreta de cambio en la que a partir de un cambio que se requiera, se expliquen paso por paso (incluyendo comandos y uso de herramientas) lo que hay que hacer para realizar dicho cambio. Debe ser un ejercicio ilustrativo de todo el proceso de evolución y gestión de la configuración del proyecto. 
+Equipos con los que se ha integrado y los motivos por lo que lo ha hecho y lugar en el que se ha dado la integración: 
+* [Nombre-del-equipo](https://github.com/nombredeusuariodegithub): breve descripción de la integración 
+* [Nombre-del-equipo](https://github.com/nombredeusuariodegithub): breve descripción de la integración 
+* [Nombre-del-equipo](https://github.com/nombredeusuariodegithub): breve descripción de la integración 
+
+## Resumen ejecutivo (800 palabras aproximadamente)
+Se sintetizará de un vistazo lo hecho en el trabajo y los datos fundamentales. Se usarán palabras para resumir el proyecto presentado. 
+
+## Descripción del sistema (1.500 palabras aproximadamente)
+Se explicará el sistema desarrollado desde un punto de vista funcional y arquitectónico. Se hará una descripción tanto funcional como técnica de sus componentes y su relación con el resto de subsistemas. Habrá una sección que enumere explícitamente cuáles son los cambios que se han desarrollado para el proyecto. 
+
+## Visión global del proceso de desarrollo (1.500 palabras aproximadamente)
+Debe dar una visión general del proceso que ha seguido enlazándolo con las herramientas que ha utilizado. Ponga un ejemplo de un cambio que se proponga al sistema y cómo abordaría todo el ciclo hasta tener ese cambio en producción. Los detalles de cómo hacer el cambio vendrán en el apartado correspondiente. 
+
+### Entorno de desarrollo (800 palabras aproximadamente)
+Debe explicar cuál es el entorno de desarrollo que ha usado, cuáles son las versiones usadas y qué pasos hay que seguir para instalar tanto su sistema como los subsistemas relacionados para hacer funcionar el sistema al completo. Si se han usado distintos entornos de desarrollo por parte de distintos miembros del grupo, también debe referenciarlo aquí. 
+
+### Ejercicio de propuesta de cambio
+Se presentará un ejercicio con una propuesta concreta de cambio en la que a partir de un cambio que se requiera, se expliquen paso por paso (incluyendo comandos y uso de herramientas) lo que hay que hacer para realizar dicho cambio. Debe ser un ejercicio ilustrativo de todo el proceso de evolución y gestión de la configuración del proyecto. 
+
+Crear issue usando la plantilla de issues desde github.
+<img width="1076" height="895" alt="image" src="https://github.com/user-attachments/assets/bb344c76-cb5f-46eb-840e-6319aafbc334" />
+<img width="1320" height="895" alt="image" src="https://github.com/user-attachments/assets/84bf0d35-38a9-4b22-b390-5635d0e72199" />
+<img width="1320" height="895" alt="image" src="https://github.com/user-attachments/assets/f0373d02-d70c-4215-a862-9a8d8d94fa14" />
+
+
+Crear rama en local para trabajar en esa issue.
+git branch prueba
+git checkout prueba
+
+Mandar la rama al repositorio de github.
+git push -u origin prueba
+
+Hacer el cambio.
+
+Hacer el commit del cambio usando la plantilla de commit.
+git add --all
+git config commit.template .github/COMMIT_TEMPLATE/commit_template.txt
+git commit
+
+Hacer push.
+git push
+
+Hacer merge a trunk.
+git checkout trunk
+git pull trunk
+git merge --no--ff prueba
+git push
+
+Hacer merge a main.
+git checkout main
+git pull main
+git merge --no-ff trunk
+git push
 
 ### Conclusiones y trabajo futuro
 Se enunciarán algunas conclusiones y se presentará un apartado sobre las mejoras que se proponen para el futuro (curso siguiente) y que no han sido desarrolladas en el sistema que se entrega
