@@ -93,8 +93,47 @@ La arquitectura puede dividirse conceptualmente en tres capas principales:
 
 ### 3. Descripción Técnica de los Componentes y Subsistemas
 
-### Visión global del proceso de desarrollo (1.500 palabras aproximadamente)
-Debe dar una visión general del proceso que ha seguido enlazándolo con las herramientas que ha utilizado. Ponga un ejemplo de un cambio que se proponga al sistema y cómo abordaría todo el ciclo hasta tener ese cambio en producción. Los detalles de cómo hacer el cambio vendrán en el apartado correspondiente.  
+### Visión global del proceso de desarrollo
+El desarrollo de NBAHub se ha llevado a cabo siguiendo un enfoque iterativo e incremental, adaptando las metodologías ágiles al contexto académico y organizativo de un equipo de estudiantes. Lejos de imponer un marco rígido como Scrum, que requiere roles estrictos y eventos temporales fijos, hemos optado por una metodología de trabajo colaborativa y flexible, centrada en la entrega continua de valor y la gestión visual de tareas.
+
+Para organizar el trabajo del equipo, hemos utilizado GitHub Projects como herramienta central de gestión. Hemos implementado un tablero tipo Kanban donde las tareas fluyen a través de diferentes estados (Todo, In Progress, Done). La comunicación se ha mantenido fluida mediante reuniones, convocadas según la necesidad del proyecto para desbloquear problemas técnicos o planificar las siguientes funcionalidades a desarrollar.
+
+#### Control de versiones y estrategia de ramas 
+
+El control de versiones ha sido un pilar fundamental para evitar conflictos y mantener la integridad del código fuente. Hemos utilizado Git como sistema de control de versiones y GitHub como plataforma de alojamiento remoto.
+
+Para organizar el flujo de trabajo, hemos seguido la estrategia sugerida por la asignatura, EGCFLOW. Las ramas principales que estructuran nuestro repositorio son:
+
+    main: Representa la versión de producción estable. Todo el código que llega a esta rama ha sido probado y se considera listo para ser desplegado o entregado.
+
+    trunk: Actúa como la rama de integración principal. Es el punto de encuentro donde convergen los desarrollos de todos los miembros del equipo. Aquí se resuelven los conflictos de integración antes de promocionar el código a producción.
+
+Paralelamente, utilizamos ramas temporales para el trabajo diario:
+
+    feature/<nombre-funcionalidad>: Cada nueva funcionalidad se desarrolla en su propia rama aislada, creada a partir de trunk. Esto permite que varios desarrolladores trabajen simultáneamente sin pisarse el código.
+
+    bugfix/<descripcion-error>: Ramas destinadas a la corrección rápida de errores detectados en el sistema.
+
+#### Gestión del entorno y dependencias
+
+Dado que el proyecto se basa en un fork del repositorio UVLHub en GitHub, no hemos creado el entorno de trabajo desde cero. Nuestra labor se ha centrado en comprender y respetar la arquitectura que ya traía el código original para integrar nuestras nuevas funcionalidades sin alterar el funcionamiento base.
+
+Nuestra estrategia de adaptación se resume en tres puntos:
+
+    Estructura heredada: El repositorio original incluye una herramienta llamada Rosemary para gestionar el código. Nosotros la hemos utilizado para crear los nuevos módulos. De esta forma, Rosemary genera automáticamente los archivos y carpetas siguiendo el estándar del proyecto, garantizando que nuestro código nuevo sea indistinguible en estructura del código original.
+
+    Control de librerías: Al hacer el fork, heredamos un archivo requirements.txt con versiones específicas de las librerías. Hemos mantenido estas versiones intactas para evitar incompatibilidades.
+
+    Infraestructura: El proyecto descargado venía preparado para ejecutarse en Docker. Hemos aprovechado los archivos de configuración de Docker ya existentes, realizando solo los ajustes mínimos necesarios para integrar los nuevos servicios dentro de esta infraestructura preexistente. En cambio, la implementación con Vagrant se realizó completamente desde cero. Nuestro trabajo consistió en crear todos los archivos de configuración necesarios (como el Vagrantfile y scripts bootstrap.sh) para poder levantar y gestionar toda la infraestructura del proyecto utilizando Vagrant.
+
+#### Arquitectura del sistema
+NBAHub es una aplicación web basada en el patrón Modelo-Vista-Controlador (MVC), construida sobre Python y Flask. La arquitectura es modular gracias al uso de Blueprints. Esto significa que cada parte de la web (Autenticación, Datasets, Comentarios...) funciona como un mini-paquete independiente con sus propias rutas y modelos, lo que facilita mucho el mantenimiento.
+
+    Backend: Flask gestiona la lógica y SQLAlchemy maneja la base de datos MariaDB.
+    Frontend: Usamos Jinja2 para renderizar el HTML en el servidor y Bootstrap para el diseño visual, adaptado ahora a la estética de la NBA.
+
+#### Aseguramiento de calidad
+Hemos implementado una batería de pruebas con pytest, cubrimos desde tests unitarios (lógica interna) hasta pruebas de integración (rutas y base de datos). También hacemos pruebas End-to-End con Selenium para simular a un usuario real navegando por la web.
 
 ### Entorno de desarrollo
 Para garantizar la consistencia y flexibilidad durante el ciclo de vida del desarrollo de la aplicación, el equipo de trabajo ha establecido tres entornos distintos, todos ellos basados en **Ubuntu (versión 22.04 LTS o superior)** y usando Visual Studio Code como IDE.
