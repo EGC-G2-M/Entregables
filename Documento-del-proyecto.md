@@ -293,7 +293,7 @@ git push origin trunk
 ```
 
 ### PASO 7. Despliegue a Producción (Main)
-Finalmente, integrar los cambios validados desde trunk hacia la rama principal (main).
+Integrar los cambios validados desde trunk hacia la rama principal (main).
 
 ```bash
 git checkout main
@@ -304,6 +304,12 @@ git merge --no-ff trunk
 
 git push origin main
 ```
+
+### PASO 8. Comprobación del cambio
+Finalmente, comprobar que los cambios son correctos tanto en el commit como en trunk.
+
+* **Acción:** Comprobar que el commit pasa el ciclo de ci/cd.
+* **Acción:** Desplegar de nuevo el proyecto para ver el cambio en la rama main.
 
 # 8. Conclusiones y trabajo futuro
 ## 8.1. Conclusiones
