@@ -56,7 +56,7 @@ Por último, la calidad del software se ha garantizado mediante una estrategia d
 
 En definitiva, hemos cogido un proyecto complejo y lo hemos evolucionado con éxito hacia NBAHub, aplicando herramientas de gestión de configuración y estrategias de despliegue flexibles para mantener el control sobre el desarrollo. El resultado es una plataforma transformada que integra funcionalidades sociales y de descubrimiento, cumpliendo con los objetivos planteados.
 
-# 4. Descripción del sistema (1.500 palabras aproximadamente)
+# 4. Descripción del sistema 
 Se explicará el sistema desarrollado desde un punto de vista funcional y arquitectónico. Se hará una descripción tanto funcional como técnica de sus componentes y su relación con el resto de subsistemas. Habrá una sección que enumere explícitamente cuáles son los cambios que se han desarrollado para el proyecto.
 
 Este documento describe el sistema desarrollado en el repositorio EGC-G2-M/nba-hub, un proyecto diseñado para proporcionar una plataforma centralizada para la consulta y gestión de información relevante de la NBA (National Basketball Association). El sistema aborda las necesidades de usuarios interesados en acceder a estadísticas, resultados y datos de jugadores y equipos de manera eficiente.
@@ -82,7 +82,44 @@ El sistema implementa una arquitectura Cliente-Servidor, estructurada bajo un pa
 - Capa de Datos:
         Almacena, gestiona y recupera toda la información persistente, incluyendo estadísticas, metadatos de partidos, perfiles, etc. Es accedida únicamente por la Capa de Aplicación.
 
-## 4.3. Descripción Técnica de los Componentes y Subsistemas
+## 4.3. Descripción técnica de los componentes y subsistemas
+Para construir las funcionalidades descritas en la sección 4.1 sin complicar el mantenimiento del código, hemos aprovechado la estructura modular que ya tenía el proyecto (basada en Blueprints). Así es cómo hemos resuelto los retos técnicos principales:
+
+A. Gestión de comentarios y respuestas anidadas
+
+Para habilitar los hilos de conversación y la respuesta a comentarios debíamos diferenciar de alguna manera los comentarios "padre" de las respuestas.
+
+    Solución: Diseñamos la base de datos para que cada comentario tenga un parent_id. Este campo parent_id es None si el comentario no es una respuesta, y si es una respuesta el parent_id es el id del comentario al cual se está respondiendo.
+
+    Visualización: Para pintar esto en pantalla sin usar código complejo, incluimos el id del comentario a responder internamente en el formulario de creación de la respuesta.
+
+B. Motor de Descubrimiento (búsqueda y trending)
+
+    Trending datasets: El sistema decide qué datasets son populares basándose en el número de personas que los han descargado. Contamos las personas que han realizado alguna descarga en un dataset y mostramos los que tienen mayor actividad en la sección de tendencias.
+
+    Búsqueda avanzada: Hemos mejorado el buscador simple. Tal y como se muestra en la interfaz, ahora el usuario puede filtrar por múltiples criterios a la vez: búsqueda de texto libre (título, descripción, autores...), tipo de publicación, un rango de fechas concreto (inicio y fin) y ordenación por antigüedad (más nuevos o más viejos). El sistema combina todos estos filtros para devolver el resultado exacto.
+
+C. Seguridad y simulación
+
+    Seguridad (2FA): Añadimos un extra de protección. Además de la contraseña, ahora podemos pedir un código temporal al iniciar sesión. Modificamos el sistema para que compruebe este segundo código antes de dejar pasar al usuario.
+
+    Simulación (Fakenodo): Para no depender de internet ni de la web externa de Zenodo mientras programamos, creamos un "simulador" interno. Es una herramienta que engaña al sistema haciéndole creer que sube los archivos a la nube real, lo que nos permite probar todo el proceso mucho más rápido y sin conexión.
+
+## 4.4. Cambios en la arquitectura
+
+Para implementar las funcionalidades anteriores, hemos realizado las siguientes intervenciones en la estructura del proyecto original:
+
+    Nuevo módulo comment: Creación desde cero del Blueprint que contiene toda la lógica, rutas y modelos de la sección social.
+
+    Modificación del nódulo datasets: Ampliación del servicio para incluir el algoritmo de Trending, los contadores de descarga y los filtros de búsqueda avanzada.
+
+    Modificación del módulo auth: Alteración del modelo de usuario y del flujo de inicio de sesión para integrar la verificación en dos pasos (TOTP).
+
+    Nuevo componente fakenodo: Creación de un servicio de simulación para el entorno de desarrollo local.
+
+    Infraestructura de datos: Mejora y creación de nuevos seeders (scripts de carga de datos) para poblar la base de datos con información temática de la NBA.
+
+    Interfaz gráfica: Reemplazo de los estilos base por una nueva identidad visual (NBAHub) y adaptación de las plantillas Jinja2.
 
 # 5. Visión global del proceso de desarrollo
 El desarrollo de NBAHub se ha llevado a cabo siguiendo un enfoque iterativo e incremental, adaptando las metodologías ágiles al contexto académico y organizativo de un equipo de estudiantes. Lejos de imponer un marco rígido como Scrum, que requiere roles estrictos y eventos temporales fijos, hemos optado por una metodología de trabajo colaborativa y flexible, centrada en la entrega continua de valor y la gestión visual de tareas.
