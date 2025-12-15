@@ -332,4 +332,24 @@ git push origin main
 ```
 
 # 8. Conclusiones y trabajo futuro
-Se enunciarán algunas conclusiones y se presentará un apartado sobre las mejoras que se proponen para el futuro (curso siguiente) y que no han sido desarrolladas en el sistema que se entrega
+## 8.1. Conclusiones
+
+El desarrollo de NBAHub ha representado un desafío significativo en términos de adaptación y evolución de software. Más allá de la implementación técnica de nuevas funcionalidades, la principal lección aprendida ha sido conocer la complejidad de trabajar sobre un sistema heredado.
+
+Al partir de un fork de UVLHub, hemos comprobado que la ingeniería de software no consiste únicamente en escribir código nuevo, sino en comprender, respetar e integrar desarrollos sobre una arquitectura preexistente. En este contexto, la Gestión de la Configuración ha dejado de ser un concepto teórico para convertirse en una herramienta indispensable. La implementación de pipelines de Integración y Despliegue Continuo (CI/CD) mediante GitHub Actions ha sido determinante; automatizar la ejecución de pruebas y la validación del código en cada Pull Request nos ha permitido detectar errores de integración de forma temprana, garantizando que la rama principal se mantenga siempre estable y libre de regresiones.
+
+Sin embargo, cabe destacar que encontramos uvlhub demasiado complicado en el contexto de la asignatura. Dado que el foco de la asignatura es la Gestión de la Configuración, la elevada complejidad del código base nos ha supuesto a veces un obstáculo desproporcionado. Hemos tenido que invertir una gran cantidad de tiempo en depurar y entender la lógica interna del proyecto, un esfuerzo que nos habría gustado dedicar a profundizar más en las propias estrategias de configuración y automatización.
+
+
+## 8.2. Trabajo Futuro
+
+Aunque el sistema es funcional, identificamos varias mejoras para una futuras mejoras del proyecto:
+
+    Datos reales (APIs): Conectar la web a una API oficial de la NBA para que las estadísticas se actualicen solas, en lugar de subirlas manualmente.
+
+    Logros: Crear un sistema de medallas o niveles para premiar a los usuarios que más participen o suban mejores datasets.
+
+    Despliegue Cloud: Llevar el proyecto de localhost (Docker) a un entorno de producción real en la nube (AWS/Azure) con despliegue automático.
+
+    Notificaciones: Avisar al usuario al instante cuando alguien responda a sus comentarios.
+
