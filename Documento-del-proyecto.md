@@ -231,40 +231,81 @@ Al igual que en los entornos anteriores, se debe definir el entorno copiando la 
 ### Ejercicio de propuesta de cambio
 Se presentará un ejercicio con una propuesta concreta de cambio en la que a partir de un cambio que se requiera, se expliquen paso por paso (incluyendo comandos y uso de herramientas) lo que hay que hacer para realizar dicho cambio. Debe ser un ejercicio ilustrativo de todo el proceso de evolución y gestión de la configuración del proyecto. 
 
-Crear issue usando la plantilla de issues desde github.
+
+
+### Propuesta de Flujo de Trabajo (Workflow) para Cambios
+
+El siguiente procedimiento describe el ciclo de vida de una modificación en el código, desde la definición de la tarea hasta su integración en las ramas principales.
+
+##### 0. Cambio a Realizar
+Cambiar el color de nba-hub.
+
+##### 1. Gestión de la Incidencia (Issue)
+Se debe crear una *issue* en GitHub utilizando la plantilla predefinida para asegurar que toda la información necesaria quede registrada.
+
+* **Acción:** Ir a la pestaña "Issues" en GitHub > "New Issue" > Seleccionar plantilla.
+
 <img width="1076" height="895" alt="image" src="https://github.com/user-attachments/assets/bb344c76-cb5f-46eb-840e-6319aafbc334" />
 <img width="1320" height="895" alt="image" src="https://github.com/user-attachments/assets/84bf0d35-38a9-4b22-b390-5635d0e72199" />
 <img width="1320" height="895" alt="image" src="https://github.com/user-attachments/assets/f0373d02-d70c-4215-a862-9a8d8d94fa14" />
 
+##### 2. Preparación del Entorno Local
+Crear una nueva rama local para aislar los cambios.
 
-Crear rama en local para trabajar en esa issue.
-git branch prueba
-git checkout prueba
+```bash
+git checkout -b prueba
+```
+##### 3. Vinculación con el Repositorio Remoto
+Subir la rama al repositorio remoto para establecer el seguimiento (tracking).
 
-Mandar la rama al repositorio de github.
+```bash
 git push -u origin prueba
+```
 
-Hacer el cambio.
+##### 4. Desarrollo y Confirmación de Cambios (Commit)
+Una vez realizados los cambios en el código, se procede al stage y al commit. Es obligatorio utilizar la plantilla de commit del proyecto.
 
-Hacer el commit del cambio usando la plantilla de commit.
+```bash
 git add --all
+
 git config commit.template .github/COMMIT_TEMPLATE/commit_template.txt
+
 git commit
+```
 
-Hacer push.
+
+##### 5. Sincronización de Cambios (Push)
+Subir los cambios confirmados a la rama remota.
+
+```bash
 git push
+```
 
-Hacer merge a trunk.
+##### 6. Integración en Trunk (Entorno de Desarrollo/Pruebas)
+Fusionar los cambios en la rama de integración (trunk) trayendo primero los últimos cambios remotos para evitar conflictos.
+
+```bash
 git checkout trunk
-git pull trunk
-git merge --no--ff prueba
-git push
 
-Hacer merge a main.
+git pull origin trunk
+
+git merge --no-ff prueba
+
+git push origin trunk
+```
+
+##### 7. Despliegue a Producción (Main)
+Finalmente, integrar los cambios validados desde trunk hacia la rama principal (main).
+
+```bash
 git checkout main
-git pull main
+
+git pull origin main
+
 git merge --no-ff trunk
-git push
+
+git push origin main
+```
 
 ### Conclusiones y trabajo futuro
 Se enunciarán algunas conclusiones y se presentará un apartado sobre las mejoras que se proponen para el futuro (curso siguiente) y que no han sido desarrolladas en el sistema que se entrega
