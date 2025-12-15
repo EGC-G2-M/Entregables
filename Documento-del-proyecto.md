@@ -38,10 +38,10 @@ La tabla contiene la información de cada miembro del proyecto y el total de la 
   * Work Item: principal WI del que se ha hecho cargo el miembro del proyecto
   * Dificultad: señalar el grado de dificultad en cada caso. Además, en los totales, poner cuántos se han hecho de cada grado de dificultad entre paréntesis. 
 
-# Integración con otros equipos
+# 2. Integración con otros equipos
 No aplica, nuestro proyecto es individual.
 
-## Resumen ejecutivo 
+# 3. Resumen ejecutivo 
 Este trabajo, realizado para la asignatura de Evolución y Gestión de la Configuración (EGC), presenta una evolución y adaptación significativa de UVLHub. Hemos tomado como base este repositorio, originalmente diseñado para la gestión de Feature Models y archivos .uvl, y lo hemos modificado para aplicarlo a un dominio totalmente diferente: la gestión de datos y estadísticas de la NBA. El objetivo ha sido demostrar la flexibilidad de la arquitectura original reutilizándola para otro contexto de compartición de documentos, a la vez que enriquecemos la plataforma mejorando el login y la búsqueda de datasets y añadiendo nuevas funcionalidades, como la pantalla de trending datasets o el módulo de comentarios para fomentar el debate entre los aficionados.
 
 El sistema base está construido sobre Flask (Python). Siguiendo la metodología de trabajo establecida en la asignatura, hemos mantenido la arquitectura modular del proyecto para integrar las nuevas funcionalidades y el cambio de dominio sin afectar a la estabilidad del sistema. En esta línea, hemos usado Rosemary, la herramienta de línea de comandos (CLI) nativa de este ecosistema. Su utilización nos ha permitido generar el esqueleto del código (rutas, servicios y repositorios) alineándonos con los estándares del proyecto base, lo que ha facilitado enormemente la organización de carpetas y la configuración inicial.
@@ -56,29 +56,29 @@ Por último, la calidad del software se ha garantizado mediante una estrategia d
 
 En definitiva, hemos cogido un proyecto complejo y lo hemos evolucionado con éxito hacia NBAHub, aplicando herramientas de gestión de configuración y estrategias de despliegue flexibles para mantener el control sobre el desarrollo. El resultado es una plataforma transformada que integra funcionalidades sociales y de descubrimiento, cumpliendo con los objetivos planteados.
 
-# 2. Descripción del sistema (1.500 palabras aproximadamente)
+# 4. Descripción del sistema (1.500 palabras aproximadamente)
 Se explicará el sistema desarrollado desde un punto de vista funcional y arquitectónico. Se hará una descripción tanto funcional como técnica de sus componentes y su relación con el resto de subsistemas. Habrá una sección que enumere explícitamente cuáles son los cambios que se han desarrollado para el proyecto.
 
 Este documento describe el sistema desarrollado en el repositorio EGC-G2-M/nba-hub, un proyecto diseñado para proporcionar una plataforma centralizada para la consulta y gestión de información relevante de la NBA (National Basketball Association). El sistema aborda las necesidades de usuarios interesados en acceder a estadísticas, resultados y datos de jugadores y equipos de manera eficiente.
-## 2.1. Perspectiva Funcional del Sistema
+## 4.1. Perspectiva Funcional del Sistema
 Desde un punto de vista funcional, el sistema se enfoca en la presentación y la interacción con la información, actuando como un punto de acceso a diversos datos del mundo del baloncesto. El sistema implementa las siguientes funcionalidades:
 
-### 2.1.A Visualización de Estadísticas
+### 4.1.A Visualización de Estadísticas
 Permite a los usuarios consultar estadísticas detalladas de jugadores (puntos, asistencias, rebotes, etc.) y equipos. Esto incluye la capacidad de filtrar y ordenar los datos.
 
-### 2.1.B Búsqueda avanzada
+### 4.1.B Búsqueda avanzada
 Permite buscar información específica (jugadores, equipos, temporadas) a través de un motor de búsqueda intuitivo.
 
-### 2.1.C Descarga de datasets
+### 4.1.C Descarga de datasets
 Permite a los usuarios descargar aquellos datasets de estadísticas que les interesen.
 
-### 2.1.D Interacción en datasets
+### 4.1.D Interacción en datasets
 El sistema implementa funcionalidades para tener un conteo de número de descargas y visualizar aquellos con mayor número de descargas.
 
-### 2.1.E Comentarios en datasets
+### 4.1.E Comentarios en datasets
 El sistema permite a los usuarios añadir comentarios a los datasets.
 
-## 2.2. Arquitectura del sistema
+## 4.2. Arquitectura del sistema
 El sistema implementa una arquitectura Cliente-Servidor, estructurada bajo un patrón MVC (Modelo-Vista-Controlador) La arquitectura puede dividirse conceptualmente en tres capas principales:
 
 - Capa de Presentación (Frontend):
@@ -88,14 +88,14 @@ El sistema implementa una arquitectura Cliente-Servidor, estructurada bajo un pa
 - Capa de Datos:
         Almacena, gestiona y recupera toda la información persistente, incluyendo estadísticas, metadatos de partidos, perfiles, etc. Es accedida únicamente por la Capa de Aplicación.
 
-## 2.3. Descripción Técnica de los Componentes y Subsistemas
+## 4.3. Descripción Técnica de los Componentes y Subsistemas
 
-# 3. Visión global del proceso de desarrollo
+# 5. Visión global del proceso de desarrollo
 El desarrollo de NBAHub se ha llevado a cabo siguiendo un enfoque iterativo e incremental, adaptando las metodologías ágiles al contexto académico y organizativo de un equipo de estudiantes. Lejos de imponer un marco rígido como Scrum, que requiere roles estrictos y eventos temporales fijos, hemos optado por una metodología de trabajo colaborativa y flexible, centrada en la entrega continua de valor y la gestión visual de tareas.
 
 Para organizar el trabajo del equipo, hemos utilizado GitHub Projects como herramienta central de gestión. Hemos implementado un tablero tipo Kanban donde las tareas fluyen a través de diferentes estados (Todo, In Progress, Done). La comunicación se ha mantenido fluida mediante reuniones, convocadas según la necesidad del proyecto para desbloquear problemas técnicos o planificar las siguientes funcionalidades a desarrollar.
 
-## 3.1. Control de versiones y estrategia de ramas 
+## 5.1. Control de versiones y estrategia de ramas 
 
 El control de versiones ha sido un pilar fundamental para evitar conflictos y mantener la integridad del código fuente. Hemos utilizado Git como sistema de control de versiones y GitHub como plataforma de alojamiento remoto.
 
@@ -111,7 +111,7 @@ Paralelamente, utilizamos ramas temporales para el trabajo diario:
 
     bugfix/<descripcion-error>: Ramas destinadas a la corrección rápida de errores detectados en el sistema.
 
-## 3.2. Gestión del entorno y dependencias
+## 5.2. Gestión del entorno y dependencias
 
 Dado que el proyecto se basa en un fork del repositorio UVLHub en GitHub, no hemos creado el entorno de trabajo desde cero. Nuestra labor se ha centrado en comprender y respetar la arquitectura que ya traía el código original para integrar nuestras nuevas funcionalidades sin alterar el funcionamiento base.
 
@@ -123,22 +123,22 @@ Nuestra estrategia de adaptación se resume en tres puntos:
 
     Infraestructura: El proyecto descargado venía preparado para ejecutarse en Docker. Hemos aprovechado los archivos de configuración de Docker ya existentes, realizando solo los ajustes mínimos necesarios para integrar los nuevos servicios dentro de esta infraestructura preexistente. En cambio, la implementación con Vagrant se realizó completamente desde cero. Nuestro trabajo consistió en crear todos los archivos de configuración necesarios (como el Vagrantfile y scripts bootstrap.sh) para poder levantar y gestionar toda la infraestructura del proyecto utilizando Vagrant.
 
-## 3.3 Arquitectura del sistema
+## 5.3 Arquitectura del sistema
 NBAHub es una aplicación web basada en el patrón Modelo-Vista-Controlador (MVC), construida sobre Python y Flask. La arquitectura es modular gracias al uso de Blueprints. Esto significa que cada parte de la web (Autenticación, Datasets, Comentarios...) funciona como un mini-paquete independiente con sus propias rutas y modelos, lo que facilita mucho el mantenimiento.
 
     Backend: Flask gestiona la lógica y SQLAlchemy maneja la base de datos MariaDB.
     Frontend: Usamos Jinja2 para renderizar el HTML en el servidor y Bootstrap para el diseño visual, adaptado ahora a la estética de la NBA.
 
-## 3.4 Aseguramiento de calidad
+## 5.4 Aseguramiento de calidad
 Hemos implementado una batería de pruebas con pytest, cubrimos desde tests unitarios (lógica interna) hasta pruebas de integración (rutas y base de datos). También hacemos pruebas End-to-End con Selenium para simular a un usuario real navegando por la web.
 
-# 4. Entorno de desarrollo
+# 6. Entorno de desarrollo
 Para garantizar la consistencia y flexibilidad durante el ciclo de vida del desarrollo de la aplicación, el equipo de trabajo ha establecido tres entornos distintos, todos ellos basados en **Ubuntu (versión 22.04 LTS o superior)** y usando Visual Studio Code como IDE. Recordamos que la gestión del código fuente se realiza independientemente del entorno de desarrollo seleccionado (Local, Docker o Virtualizado), el paso inicial común para todos los integrantes es la clonar el repositorio oficial del proyecto: ```git clone https://github.com/EGC-G2-M/nba-hub```
 
-## 4.1. Entorno 1: Desarrollo Local (Nativo)
+## 6.1. Entorno 1: Desarrollo Local (Nativo)
 Este entorno implica la instalación directa de las dependencias en el sistema operativo anfitrión.
 
-### 4.1.A Requisitos del Sistema y Base de Datos
+### 6.1.A Requisitos del Sistema y Base de Datos
 El proyecto requiere **Python 3.12** y el sistema gestor de base de datos **MariaDB (versión 10.11.13)**.
 **Instalación de MariaDB**: Se procede a la instalación y arranque del servicio mediante los siguientes comandos: 
 ```
@@ -168,7 +168,7 @@ GRANT ALL PRIVILEGES ON nbahubdb_test.* TO 'nbahubdb_user'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
 ```
-### 4.1.B Configuración del Entorno Virtual y Dependencias
+### 6.1.B Configuración del Entorno Virtual y Dependencias
 Para aislar las librerías del proyecto, se utiliza el módulo ```venv``` de Python. El procedimiento de configuración incluye la definición de variables de entorno y la instalación de dependencias.
 - **1. Variables de Entorno:** Se duplica el fichero de ejemplo para crear la configuración local y se configura el fichero ```.moduleignore``` para excluir el módulo de webhook en desarrollo:
 ```
@@ -187,7 +187,7 @@ pip install --upgrade pip
 pip install -r requirements.txt
 pip install -e ./
 ```
-### 4.1.C Migraciones y Ejecución
+### 6.1.C Migraciones y Ejecución
 Finalmente, se inicializa la estructura de la base de datos y se puebla con datos de prueba (seeding). Una vez finalizado, se lanza el servidor de desarrollo en modo debug.
 ```
 # Migración y Seeding
@@ -197,36 +197,36 @@ rosemary db:seed
 # Ejecución del servidor
 flask run --host=0.0.0.0 --reload --debug
 ```
-## 4.2. Entorno 2: Contenedorización con Docker
+## 6.2. Entorno 2: Contenedorización con Docker
 Como alternativa al desarrollo local nativo, se ha implementado un entorno basado en contenedores.
-### 4.2.A Requisitos y Configuración Inicial
+### 6.2.A Requisitos y Configuración Inicial
 El prerrequisito fundamental para este entorno es disponer del motor de Docker instalado (versión 29.1.x o superior) junto con el plugin de Docker Compose.
 
 Previo al despliegue, se deben establecer las variables de entorno específicas para la orquestación de contenedores, duplicando el archivo de plantilla proporcionado en el repositorio: ```cp .env.docker.example .env```
-### 4.2.B Despliegue de Servicios
+### 6.2.B Despliegue de Servicios
 El levantamiento de la infraestructura se realiza mediante Docker Compose, utilizando un fichero de definición específico para el entorno de desarrollo (docker-compose.dev.yml). El siguiente comando construye las imágenes necesarias y levanta los contenedores en segundo plano (detached mode):
 ```
 docker compose -f docker/docker-compose.dev.yml up -d
 ```
 Este comando orquesta automáticamente la creación de la red interna, el volumen de la base de datos y el contenedor de la aplicación Flask.
 
-### 4.2.C Integración con el IDE (DevContainers)
+### 6.2.C Integración con el IDE (DevContainers)
 Una vez que los servicios están activos, se utiliza la paleta de comandos del editor para ejecutar la acción: ```Reopen in Container```.
 Esta acción permite que el editor de código se conecte directamente al contenedor en ejecución, utilizando el entorno de Python y las herramientas instaladas dentro de él, asegurando que el entorno de escritura de código sea idéntico al de ejecución.
 
-## 4.3 Entorno 3: Virtualización con Vagrant y VirtualBox
+## 6.3 Entorno 3: Virtualización con Vagrant y VirtualBox
 Como tercera vía, se ha implementado un entorno basado en Infraestructura como Código (IaC) utilizando virtualización completa. Este enfoque permite desplegar una máquina virtual (VM) que replica exactamente el sistema operativo y la configuración de producción, independientemente del sistema operativo anfitrión del desarrollador (Windows, macOS o Linux).
-### 4.3.A Requisitos de Virtualización
+### 6.3.A Requisitos de Virtualización
 Para orquestar este entorno, es necesario disponer de las siguientes herramientas de virtualización:
     Vagrant: Versión 2.4.x o superior (gestor de entornos).
     VirtualBox: Versión 7.0.x o superior (hipervisor).
-### 4.3.B Provisionamiento y Despliegue
+### 6.3.B Provisionamiento y Despliegue
 Al igual que en los entornos anteriores, se debe definir el entorno copiando la plantilla específica para Vagrant: ```cp ./.env.vagrant.example .env```. Para levantar la máquina se ejecuta el siguiente comando en la raíz del proyecto: ```.vagrant up```.
 
-# 5 Ejercicio de propuesta de cambio
+# 7 Ejercicio de propuesta de cambio
 Se presentará un ejercicio con una propuesta concreta de cambio en la que a partir de un cambio que se requiera, se expliquen paso por paso (incluyendo comandos y uso de herramientas) lo que hay que hacer para realizar dicho cambio. Debe ser un ejercicio ilustrativo de todo el proceso de evolución y gestión de la configuración del proyecto. 
 
-## 5.1. Propuesta de Flujo de Trabajo (Workflow) para Cambios
+## 7.1. Propuesta de Flujo de Trabajo (Workflow) para Cambios
 
 El siguiente procedimiento describe el ciclo de vida de una modificación en el código, desde la definición de la tarea hasta su integración en las ramas principales.
 
@@ -300,5 +300,5 @@ git merge --no-ff trunk
 git push origin main
 ```
 
-# 6. Conclusiones y trabajo futuro
+# 8. Conclusiones y trabajo futuro
 Se enunciarán algunas conclusiones y se presentará un apartado sobre las mejoras que se proponen para el futuro (curso siguiente) y que no han sido desarrolladas en el sistema que se entrega
