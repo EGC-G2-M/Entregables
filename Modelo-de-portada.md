@@ -2,7 +2,8 @@
 * grupo 2
 * Curso escolar: 2025/2026
 * Asignatura: Evolución y gestión de la configuración
-## Miembros del equipo (en orden alfabético según apellido): escala de 1 al 10 con el esfuerzo hecho en el proyecto (10 mayor implicación, 1 menor implicación)
+  
+## Miembros del equipo
 
 | Miembro | Implicación |
 | ------------- | ------------- |
@@ -15,8 +16,8 @@
 
 ## Enlaces de interés:
 * [repositorio de código](https://github.com/EGC-G2-M/nba-hub) 
-* [sistema desplegado](https://nba-hub-latest.onrender.com)
+* [sistema desplegado](https://nba-hub-pnsl.onrender.com/)
 
 ## Enlace a la documentación
 
-* [Enlace a la documentación principal] (https://github.com/EGC-G2-M/Entregables/blob/main/Documento-del-proyecto.md) 
+* [enlace a la documentación principal](https://github.com/EGC-G2-M/Entregables/blob/main/Documento-del-proyecto.md) 
