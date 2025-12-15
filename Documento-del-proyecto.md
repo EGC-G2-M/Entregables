@@ -1,42 +1,16 @@
-El documento del proyecto debe ser un documento que sintetice los aspectos del proyecto elegido para su desarrollo con respecto a los temas vistos en clases. 
-
-Debe tener claramente identificados los nombres y apellidos de cada componente, grupo al que pertenecen (1, 2, o 3 mañana o tarde), curso académico, nombre del proyecto (seguir la política de nombres). Use este [[modelo de portada]] para el documento del proyecto y alójelo en su repositorio o en otro sitio accesible y que tenga posibilidad de verse el último momento de edicación. Puede usar el repositorio del proyecto usando para ello el lenguaje de [markdown](https://guides.github.com/features/mastering-markdown/) que ofrece github. En todo caso, debe ser un documento elaborado en formato [wiki]. 
-
-Será un documento presentado de manera profesional guardando la forma en los estilos y contenidos y con el máximo nivel de rigor académico y profesional.
-
-Tenga en cuenta los siguientes aspectos: 
-
-* Siempre diferencie claramente las secciones y subsecciones y para ello use etiquetas de encabezado como las que se disponen en los lenguajes tipo _markdown_
-
-# Apartados del documento 
-
-El documento del proyecto tendrá (al menos) que sintetizar los siguientes apartados:
+Este documento recoge la memoria técnica y de gestión del proyecto NBAHub, desarrollado por el grupo G2-M para la asignatura de Evolución y Gestión de la Configuración. A continuación detallamos el proceso de transformación de la plataforma original UVLHub hacia un sistema de gestión de estadísticas de la NBA. El reporte cubre desde la nueva arquitectura y las funcionalidades implementadas + hasta las estrategias de despliegue y aseguramiento de la calidad aplicadas durante el desarrollo.
 
 # 1. Indicadores del proyecto
 
-(_debe dejar enlaces a evidencias que permitan de una forma sencilla analizar estos indicadores, con gráficas y/o con enlaces_)
-
-Miembro del equipo  | Horas | Commits | LoC | Test | Issues | Work Item| Dificultad
+Miembro del equipo  | Horas totales | Commits totales | LoC totales | Test WI | Issues WI | Work Item | Dificultad WI
 ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |  ------------- |  ------------- | 
-[Basallote Braza, David](https://github.com/orgs/DavidBBSA) | HH | XX | YY | ZZ | II | Trending datasets | H/M/L |
-[Chaves Cumbreras, David](https://github.com/davchacum) | HH | XX | YY | ZZ | II | Download counter for datasets | H/M/L |
-[Gago Vázquez, Francisco](https://github.com/frangago71) | HH | XX | YY | ZZ | II | Comments on datasets | H/M/L |
-[González Vázquez, Guillermo](https://github.com/guigonvaz) | HH | XX | YY | ZZ | II | Two-factor authentication (2FA) | H/M/L |
-[Herrera Luján, Marco Antonio](https://github.com/Marco2026) | HH | XX | YY | ZZ | II | Advanced dataset search | H/M/L |
-[Rodríguez Muñoz, Rafael](https://github.com/rafaelroodrgz) | HH | XX | YY | ZZ | II | Automatic dataset recommendations | H/M/L |
+[Basallote Braza, David](https://github.com/DavidBBSA) | 50 |20 | 🟢 +1140 🔴-367 | 10 |  https://github.com/EGC-G2-M/nba-hub/issues/8 |  Trending datasets | M |
+[Chaves Cumbreras, David](https://github.com/davchacum) | 50 | 29 |  🟢 +1418 🔴-1033 | 24 |https://github.com/EGC-G2-M/nba-hub/issues/6 | Download counter for datasets | L |
+[Gago Vázquez, Francisco](https://github.com/frangago71) | 50 | 39 | 🟢 +18876 🔴 -1548 | 13 | https://github.com/EGC-G2-M/nba-hub/issues/5 | Comments on datasets | L |
+[González Vázquez, Guillermo](https://github.com/guigonvaz) | 50 | 62 | 🟢 +1877 🔴 -509 | 21 | https://github.com/EGC-G2-M/nba-hub/issues/9 | Two-factor authentication (2FA) | H |
+[Herrera Luján, Marco Antonio](https://github.com/Marco2026) | 50 | 46 | 🟢 +1586  🔴 -332 | 28 | https://github.com/EGC-G2-M/nba-hub/issues/7 | Advanced dataset search | M |
+[Rodríguez Muñoz, Rafael](https://github.com/rafaelroodrgz) | 50 |  45 | 🟢 +18544 🔴 -1537 | 8 |https://github.com/EGC-G2-M/nba-hub/issues/10 | Automatic dataset recommendations | H |
 
-
-[Apellidos, nombre](https://github.com/nombredeusuariodegithub) | HH | XX | YY | ZZ | II | Descripción breve | H/M/L |
-**TOTAL** | tHH  | tXX | tYY | tZZ | tII | Descripción breve | H (X)/M(Y)/L(Z) |
-
-La tabla contiene la información de cada miembro del proyecto y el total de la siguiente forma: 
-  * Horas: número de horas empleadas en el proyecto
-  * Commits: solo contar los commits hechos por miembros del equipo, no lo commits previos
-  * LoC (líneas de código): solo contar las líneas producidas por el equipo y no las que ya existían o las que se producen al incluir código de terceros
-  * Test: solo contar los test realizados por el equipo nuevos
-  * Issues: solo contar las issues gestionadas dentro del proyecto y que hayan sido gestionadas por el equipo
-  * Work Item: principal WI del que se ha hecho cargo el miembro del proyecto
-  * Dificultad: señalar el grado de dificultad en cada caso. Además, en los totales, poner cuántos se han hecho de cada grado de dificultad entre paréntesis. 
 
 # 2. Integración con otros equipos
 No aplica, nuestro proyecto es individual.
