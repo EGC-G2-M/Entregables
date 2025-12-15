@@ -61,22 +61,16 @@ Se explicará el sistema desarrollado desde un punto de vista funcional y arquit
 
 Este documento describe el sistema desarrollado en el repositorio EGC-G2-M/nba-hub, un proyecto diseñado para proporcionar una plataforma centralizada para la consulta y gestión de información relevante de la NBA (National Basketball Association). El sistema aborda las necesidades de usuarios interesados en acceder a estadísticas, resultados y datos de jugadores y equipos de manera eficiente.
 ## 4.1. Perspectiva Funcional del Sistema
-Desde un punto de vista funcional, el sistema se enfoca en la presentación y la interacción con la información, actuando como un punto de acceso a diversos datos del mundo del baloncesto. El sistema implementa las siguientes funcionalidades:
+Desde un punto de vista funcional, el sistema se enfoca en la presentación y la interacción con la información, actuando como un punto de acceso a diversos datos del mundo del baloncesto. Las funcionalidades básicas han sido heredadas de uvlhub, y nuestro equipo ha añadido las siguientes funcionalidades, que se indicaban en los work items del repositorio de uvlhub: 
 
-### 4.1.A Visualización de Estadísticas
-Permite a los usuarios consultar estadísticas detalladas de jugadores (puntos, asistencias, rebotes, etc.) y equipos. Esto incluye la capacidad de filtrar y ordenar los datos.
-
-### 4.1.B Búsqueda avanzada
-Permite buscar información específica (jugadores, equipos, temporadas) a través de un motor de búsqueda intuitivo.
-
-### 4.1.C Descarga de datasets
-Permite a los usuarios descargar aquellos datasets de estadísticas que les interesen.
-
-### 4.1.D Interacción en datasets
-El sistema implementa funcionalidades para tener un conteo de número de descargas y visualizar aquellos con mayor número de descargas.
-
-### 4.1.E Comentarios en datasets
-El sistema permite a los usuarios añadir comentarios a los datasets.
+| Issue | Funcionalidad | Descripción | Interfaz Visual |
+| :--- | :--- | :--- | :--- |
+| https://github.com/EGC-G2-M/nba-hub/issues/8 | **Trending datasets** | El sistema observa el conteo de descargas y visualiza en la sección Trending datasets aquellos datasets con mayor popularidad en la comunidad. | ![Captura de trending](img/trending.png) |
+| https://github.com/EGC-G2-M/nba-hub/issues/6 | **Downloader counter for datasets** | Añade un contador de descargas en la página principal del dataset, lo que facilita la funcionalidad de Trending datasets. | ![Captura de estadísticas](img/downloadcounter.png) |
+| https://github.com/EGC-G2-M/nba-hub/issues/5 | **Comments on datasets** | El sistema permite a los usuarios añadir comentarios a los datasets, creando hilos de conversación para debatir sobre las estadísticas publicadas. También es posible votar like/dislike en los comentarios y el propietario del dataset puede fijar los comentarios.| ![Captura de comentarios](img/comments.png) |
+| https://github.com/EGC-G2-M/nba-hub/issues/9 | **Two-factor authentication (2FA)** | Añade una capa extra de seguridad al inicio de sesión, requiriendo un código temporal de doble autenticación. | ![Captura de configuración 2FA](img/2fa.png) |
+| https://github.com/EGC-G2-M/nba-hub/issues/7| **Advanced dataset search** | Permite buscar información específica (jugadores, etiquetas, temporadas) a través de un motor de búsqueda intuitivo, facilitando la localización precisa de datasets. | ![Captura de búsqueda](img/advancedsearch.png) |
+| https://github.com/EGC-G2-M/nba-hub/issues/10 | **Automatic dataset recommendations** | El sistema analiza las etiquetas del dataset actual para sugerir automáticamente al usuario otros datasets relacionados que podrían interesarle. | ![Captura de recomendaciones](img/recommendations.png) |
 
 ## 4.2. Arquitectura del sistema
 El sistema implementa una arquitectura Cliente-Servidor, estructurada bajo un patrón MVC (Modelo-Vista-Controlador) La arquitectura puede dividirse conceptualmente en tres capas principales:
